@@ -4,7 +4,7 @@ import {Link} from 'expo-router';
 const sample = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>sample</Text>
+      <Text style={styles.text}>sample new</Text>
       <Link href="/profile" style={{color:'blue'}}>Go To profile</Link>
     </View>
   )
