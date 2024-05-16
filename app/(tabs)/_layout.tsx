@@ -32,6 +32,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="sample"
+        options={{
+          title: 'Sample',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'cloud' : 'cloud-outline'} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
