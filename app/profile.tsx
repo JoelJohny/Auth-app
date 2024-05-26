@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, Image, useColorScheme } from 'react-native';
+import { View, Text, Image, useColorScheme, Alert, BackHandler } from 'react-native';
 import { styled } from 'nativewind';
+import { useFocusEffect } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
 const StyledView = styled(View);
 const StyledText = styled(Text);
@@ -8,6 +10,36 @@ const StyledImage = styled(Image);
 
 const Profile = () => {
   const colorScheme = useColorScheme();
+  const router = useRouter();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert(
+          "Logout",
+          "Are you sure you want to logout?",
+          [
+            {
+              text: "Cancel",
+              onPress: () => null,
+              style: "cancel"
+            },
+            {
+              text: "Yes",
+              onPress: () => router.replace('/index')
+            }
+          ],
+          { cancelable: false }
+        );
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
 
   return (
     <StyledView className={`flex-1 items-center justify-center p-4 ${
